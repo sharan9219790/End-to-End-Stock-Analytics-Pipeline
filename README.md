@@ -215,4 +215,4 @@ Combine charts into a **Dashboard** and save.
 
 ## 🧾 License
 
-Educational use for DATA 200 / DATA 226 lab work. Adapt freely within course guidelines.
+Educational use for DATA 226 lab work. Adapt freely within course guidelines.

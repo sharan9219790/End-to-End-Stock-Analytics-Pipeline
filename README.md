@@ -33,7 +33,7 @@
 └── README.md                        # this file
 ```
 
----
+--
 
 ## 🔧 Prerequisites
 

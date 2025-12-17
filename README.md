@@ -197,27 +197,6 @@ Combine into a unified **Stock Analytics Dashboard**.
 
 ---
 
-## ✅ Final Deliverables Summary
-
-✔ Automated ETL with Airflow  
-✔ Snowflake RAW → ANALYTICS schemas  
-✔ dbt transformations (staging → marts)  
-✔ Technical indicators (MA, RSI, returns)  
-✔ Superset dashboard for insights  
-✔ Fully environment-variable driven  
-✔ Clean structure for grading  
-
----
-
-## 🧯 Troubleshooting
-
-- **Airflow cannot connect to Snowflake** → check connection fields  
-- **dbt cannot find profiles.yml** → verify `DBT_PROFILES_DIR`  
-- **Superset dependency conflicts** → always use separate venv  
-- **Airflow DAG import errors** → ensure packages installed inside Airflow environment  
-
----
-
 ## 📄 License  
 Educational use for **DATA 226** course.
 

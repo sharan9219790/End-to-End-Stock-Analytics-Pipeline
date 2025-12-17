@@ -1,20 +1,21 @@
-# **Santa Clara Crash Analytics Pipeline — DATA226 - Group Project **
+# **Accident Analytics Pipeline — DATA226**
 *(Airflow → Snowflake → dbt → Tableau)*
 
 ## 📘 Overview
-This project implements a production-oriented ELT (Extract–Load–Transform) pipeline for analyzing Santa Clara County traffic accident data.
+This project implements a complete ELT (Extract–Load–Transform) data pipeline designed to automate traffic accident analytics for Santa Clara County using modern data engineering tooling.
 
-Pipeline steps:
-1. Extraction — crash CSV + real-time weather + traffic API data  
-2. Loading — raw data stored in Snowflake RAW schema  
-3. Transformation — dbt models (staging → intermediate → marts)  
-4. Visualization — Tableau dashboards for hotspots, trends, and risk analysis  
+The pipeline includes:
+
+1. Extraction — historical crash CSV + live weather + live traffic data  
+2. Loading — store raw data in Snowflake RAW schema  
+3. Transformation — dbt models: staging → intermediate → marts  
+4. Visualization — Tableau dashboards for trends, risk hotspots, weather effects  
 
 ---
 
 ## 🧱 Architecture Diagram
 
-To include the Mermaid diagram, paste the following into GitHub:
+To include the diagram, paste this *directly* into GitHub:
 
 \`\`\`mermaid
 flowchart LR
@@ -37,23 +38,26 @@ flowchart LR
 ├── dags/                         # Airflow DAGs for ingestion + dbt
 ├── data/                         # Historical accident dataset(s)
 ├── tableau/                      # Tableau dashboards / screenshots
-├── compose.yaml                  # Docker Compose for Airflow
+├── compose.yaml                  # Docker Compose for Airflow environment
 └── README.md
 \`\`\`
 
 ---
 
 ## 🔧 Prerequisites
-- Python 3.10+
-- Docker + Docker Compose
-- Snowflake account
-- dbt-core + dbt-snowflake
-- Tableau Desktop / Public
-- API keys: OpenWeatherMap + Google Distance Matrix
+
+- Python 3.10+  
+- Docker & Docker Compose  
+- Snowflake account  
+- dbt-core + dbt-snowflake  
+- Tableau Desktop / Tableau Public  
+- API keys:
+  - OpenWeatherMap  
+  - Google Distance Matrix API  
 
 ---
 
-## 🔐 Environment Variables
+## 🔐 Required Environment Variables
 
 \`\`\`
 export SNOWFLAKE_ACCOUNT="<account>"
@@ -69,91 +73,20 @@ export GOOGLE_DISTANCE_MATRIX_API_KEY="<maps_key>"
 
 export DBT_PROFILES_DIR="$(pwd)/dbt"
 export AIRFLOW_HOME="$(pwd)/.airflow"
-\`\\"\`
+\`\`\`
 
 ---
 
-## 🌀 Airflow Setup
+## 🌀 Airflow Configuration
 
-### Start Airflow
+### 1. Start Airflow
 \`\`\`
 docker-compose -f compose.yaml up --build
 \`\`\`
 
-### Airflow Connection (snowflake_conn)
-Account  
-User  
-Password  
-Warehouse: COMPUTE_WH  
-Database: ACCIDENT_DW  
-Schema: RAW  
-Role: DATA226_ROLE  
+### 2. Airflow UI
+http://localhost:8080  
+Login: airflow / airflow  
 
-### Airflow Variables
-snowflake_database = ACCIDENT_DW  
-raw_schema = RAW  
-intermediate_schema = INT  
-mart_schema = MART  
-openweather_api_key = <key>  
-traffic_api_key = <key>  
+### 3. Snowflake Connection (snowflake_conn)
 
----
-
-## 📡 DAGs
-
-### ingest_crash_data
-- Load CSV → RAW schema  
-- Validate row count  
-
-### ingest_weather_data
-- Pull OpenWeatherMap data  
-- Store in RAW schema  
-
-### ingest_traffic_data
-- Pull Google Distance Matrix travel-time + congestion  
-
-### run_dbt_pipeline
-- dbt run + test  
-- Builds:
-  - staging  
-  - intermediate  
-  - marts  
-
----
-
-## 🧱 dbt Layer
-
-Run:
-\`\`\`
-dbt debug
-dbt run
-dbt test
-\`\`\`
-
-Snowflake checks:
-\`\`\`
-SELECT COUNT(*) FROM RAW.CRASHES;
-SELECT * FROM MART.FACT_CRASHES LIMIT 20;
-\`\`\`
-
----
-
-## 📊 Tableau Dashboard
-
-Snowflake Connection:
-- Warehouse: COMPUTE_WH  
-- Database: ACCIDENT_DW  
-- Schema: MART  
-
-Dashboard visuals:
-- Monthly crash trends  
-- Severity category  
-- Weather × traffic control heatmap  
-- Road condition charts  
-- Geospatial hotspots  
-- Crash forecast trends  
-
----
-
-## 📄 License  
-For academic use in DATA 226 — San José State University.

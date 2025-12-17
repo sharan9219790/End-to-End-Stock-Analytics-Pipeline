@@ -61,33 +61,6 @@ flowchart LR
 
 ---
 
-## 🚀 Setup & Installation
-
-### **1. Clone the repository**
-```bash
-git clone <your-repo-url>
-cd lab2-stock-pipeline
-```
-
-### **2. Create virtual environment**
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-```
-
-### **3. Install Airflow with pinned constraints**
-```bash
-pip install "apache-airflow==2.9.3" --constraint \
-  "https://raw.githubusercontent.com/apache/airflow/constraints-2.9.3/constraints-3.10.txt"
-```
-
-Then install project requirements:
-```bash
-pip install -r requirements.txt
-```
-
----
-
 ## 🔐 Required Environment Variables
 
 ```

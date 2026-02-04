@@ -1,4 +1,3 @@
-# **Lab 2 — DATA226**
 *(Airflow → Snowflake → dbt → Superset)*
 
 ## 📘 Overview
